@@ -1,0 +1,42 @@
+import javafx.util.Pair; 
+class Solution {
+    int[][] points;
+    public int maxPoints(int[][] points) {
+        this.points = points;
+        int ans = 0;
+        for(int i = 0; i < points.length - 1; i++){
+            ans = Math.max(ans, solve(points[i], i + 1));
+        }
+        return Math.max(Math.min(1, points.length), ans);
+    }
+    
+    public int solve(int[] p, int start){
+        HashMap<Pair<Integer, Integer>, Integer> memo = new HashMap<>();
+        int constant = 1;
+        for(int i = start; i < points.length; i++){
+            int[] np = this.points[i];
+            if(np[0] == p[0] && np[1] == p[1]) constant ++;
+            else if(np[1] == p[1]){
+                Pair<Integer, Integer> temp = new Pair<>(1,0);
+                memo.put(temp, memo.getOrDefault(temp,0) + 1);
+            }else{
+                Pair<Integer, Integer> temp = makePair(p[0] - np[0], p[1] - np[1]);
+                memo.put(temp, memo.getOrDefault(temp,0) + 1);
+            }
+        }
+        int res = 0;
+        for(Map.Entry pair: memo.entrySet()){
+            res = Math.max(res, (int)(pair.getValue()));
+        }
+        return res + constant;
+    }
+    
+    public int gcd(int a, int b) {
+        return b == 0? a : gcd(b,a%b);
+    }
+    
+    public Pair<Integer, Integer> makePair(int a, int b){
+        int common = gcd(a,b);
+        return new Pair<Integer, Integer>(a / common, b / common);
+    }
+}
