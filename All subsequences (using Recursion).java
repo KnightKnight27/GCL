@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 class GFG{
 public static void printSubsequences(int[] arr, int index,
-									ArrayList<Integer> path)
+        ArrayList<Integer> path)
 {
 	if (index == arr.length)
 	{
