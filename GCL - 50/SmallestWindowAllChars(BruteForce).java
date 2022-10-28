@@ -20,13 +20,13 @@ public class Main {
            }
        }
        return true;
-//        for(int i=0;i<T.length();i++){
-//            char x = T.charAt(i);
-//            if(substring.contains(x+"") == false){
-//                return false;
-//            }
-//        }
-//        return true;
+       for(int i=0;i<T.length();i++){
+           char x = T.charAt(i);
+           if(substring.contains(x+"") == false){
+               return false;
+           }
+       }
+       return true;
    }
     public  static void main(String[] arg) {
        String S = "aabca";
